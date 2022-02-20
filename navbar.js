@@ -14,9 +14,9 @@ function NavBar() {
         <NavLink 
           className="nav-link" 
           activeStyle={{
-            fontWeight: "bold", 
-            color: "MediumSeaGreen",
-            textDecoration: "underline"
+            textDecoration: "underline",
+            textDecorationColor: "DodgerBlue",
+            textDecorationThickness: "3px"
           }} 
           to={link.path} 
           exact={true}
