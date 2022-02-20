@@ -1,11 +1,11 @@
 function NavBar() {
   const linkList = [
-    {path: '/', name:'Home'},
-    {path: '/createaccount', name:'Create Account'},
-    {path: '/login', name:'Login'},
-    {path: '/deposit', name:'Deposit'},
-    {path: '/withdraw', name:'Withdrawal'},
-    {path: '/alldata', name:'All Data'},
+    {path: '/', name:'Home', tooltipText: 'Go to welcome landing page'},
+    {path: '/createaccount', name:'Create Account', tooltipText: 'Create a new user account'},
+    {path: '/login', name:'Login', tooltipText: 'Login to an existing account'},
+    {path: '/deposit', name:'Deposit', tooltipText: 'Deposit funds to your account'},
+    {path: '/withdraw', name:'Withdraw', tooltipText: 'Withdraw funds from your account'},
+    {path: '/alldata', name:'All Data', tooltipText: 'View all users from admin console'},
   ];
 
   let links = linkList.map((link) => {
@@ -13,6 +13,9 @@ function NavBar() {
       <li className="nav-item">
         <NavLink 
           className="nav-link" 
+          data-bs-toggle="tooltip" 
+          data-bs-placement="bottom" 
+          title={link.tooltipText}
           activeStyle={{
             textDecoration: "underline",
             textDecorationColor: "DodgerBlue",
@@ -23,7 +26,13 @@ function NavBar() {
         >
           {link.name}
         </NavLink>
+
+        
+
+
       </li>
+
+      
     );
   });
 
