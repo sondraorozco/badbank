@@ -8,9 +8,9 @@ function NavBar() {
     {path: '/alldata', name:'All Data', tooltipText: 'View all users from admin console'},
   ];
 
-  let links = linkList.map((link) => {
+  let links = linkList.map((link, index) => {
     return (
-      <li className="nav-item">
+      <li className="nav-item" key={index}>
         <NavLink 
           className="nav-link" 
           data-bs-toggle="tooltip" 
@@ -26,13 +26,7 @@ function NavBar() {
         >
           {link.name}
         </NavLink>
-
-        
-
-
       </li>
-
-      
     );
   });
 
