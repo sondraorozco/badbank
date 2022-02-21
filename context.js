@@ -28,22 +28,23 @@ function Card(props) {
 };
 
 function BankForm(props) {
-  const { initialValues, fields, title, handle, hideBalance, submitText, successMessage, successButton } = props;
+  const { initialValues, fields, header, title, handle, showBalance, submitText, successMessage, successButton } = props;
   const [show, setShow] = React.useState(true);
   const [status, setStatus] = React.useState('');
   const [formValues, setFormValues] = React.useState({...initialValues});
+  const ctx = React.useContext(UserContext);
   
   const fieldList = fields.map((item, index) => {
     const { label, type='text', id, name, placeholder='' } = item;
     return (
       <div className="mb-3" key={index}>
         <label>{label}</label>
-        <input type={type} className="form-control" id={id} name={name} placeholder={placeholder} value={formValues[id]} onChange={handleFormChange} />
+        <input type={type} className="form-control" id={id} name={name} placeholder={placeholder} value={formValues[name]} onChange={handleFormChange} />
       </div>
     );
   });
   
-  const handleFormChange = (event) => {
+  function handleFormChange(event) {
     const { name, value } = event.target;
     const newValues = {
       ...formValues,
@@ -51,6 +52,18 @@ function BankForm(props) {
     };
     console.log('Form changed: ', newValues);
     setFormValues(newValues);
+    event.preventDefault();
+  };
+
+  function handleFormSubmit(formValues, callback) {
+    let res = callback(formValues);
+    if (res) {
+      setShow(false);
+      return;
+    } else {
+      setStatus('error');
+      return false;
+    }
   };
 
   function clearForm() {
@@ -58,38 +71,33 @@ function BankForm(props) {
     setShow(true);
   };
 
-  const handleFormSubmit = (formValues, callback) => {
-    if (callback(formValues)) {
-      setShow(false);
-    } else {
-      setTimeout(() => setStatus('error'),3000);
-      return false;
-    }
-  };
-
   return (
     <Card
-      header={title}
+      header={header}
       status={status}
       body={show ? (
-          <form>
-            {fieldList}
+          <>
+            { showBalance && <p>Balance: ${ctx.users[0].balance}</p> }
+            <form>
+              {fieldList}
 
-            <button 
-              type="submit" 
-              className="btn btn-light" 
-              onClick={() => {
-                console.log('Submitting deposit: ' + formValues.amount)
-                handleFormSubmit(formValues, handle);
-              }}
-            >
-              {submitText}
-            </button>
-          </form>
+              <button 
+                type="submit" 
+                className="btn btn-primary" 
+                onClick={() => {
+                  console.log('Submitting deposit: ' + formValues.amount)
+                  handleFormSubmit(formValues, handle);
+                }}
+              >
+                {submitText}
+              </button>
+            </form>
+          </>
         ) : (
           <>
             <h5>Success!</h5>
             <p>{successMessage}</p>
+            { showBalance && <p>New balance: ${ctx.users[0].balance}</p> }
             <button type="submit" className="btn btn-light" onClick={clearForm}>{successButton}</button>
           </>
         )}

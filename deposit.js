@@ -3,7 +3,7 @@ function Deposit() {
   const userId = React.useContext(CurrentUserContext);
 
   const initialValues = {
-    amount: '',
+    amount: 0,
   };
 
   let fields = [
@@ -12,7 +12,7 @@ function Deposit() {
 
   function handleDeposit(values) {
     if (values.amount > 0) {
-      ctx[0].balance = ctx[0].balance + values.amount;
+      ctx.users[0].balance = ctx.users[0].balance + Number(values.amount);
       return true;
     } else {
       return false;
@@ -24,11 +24,11 @@ function Deposit() {
       <h1 className="mb-3">Account Deposit</h1>
 
       <BankForm 
-        title="Deposit"
+        header="Deposit"
         initialValue={initialValues}
         fields={fields}
         handle={handleDeposit}
-        hideBalance={false}
+        showBalance={true}
         submitText="Deposit"
         successMessage="The deposited funds have been added to your account."
         successButton="Make another deposit"
