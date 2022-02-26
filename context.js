@@ -1,3 +1,4 @@
+const { useState, useEffect, useReducer } = React;
 const Route               = ReactRouterDOM.Route;
 const Link                = ReactRouterDOM.Link;
 const NavLink             = ReactRouterDOM.NavLink;
@@ -29,9 +30,12 @@ function Card(props) {
 
 function BankForm(props) {
   const { initialValues, fields, header, title, handle, showBalance, submitText, successMessage, successButton } = props;
-  const [show, setShow] = React.useState(true);
-  const [status, setStatus] = React.useState('');
-  const [formValues, setFormValues] = React.useState({...initialValues});
+  const [show, setShow]             = useState(true);
+  const [status, setStatus]         = useState('');
+  const [formValues, setFormValues] = useState({...initialValues});
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit]     = useState(false);
+  
   const ctx = React.useContext(UserContext);
   
   const fieldList = fields.map((item, index) => {
@@ -55,16 +59,18 @@ function BankForm(props) {
     event.preventDefault();
   };
 
-  function handleFormSubmit(formValues, callback) {
-    let res = callback(formValues);
-    if (res) {
-      setShow(false);
-      return;
-    } else {
-      setStatus('error');
-      return false;
-    }
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    setFormErrors(handle(formValues));
+    setIsSubmit(true);
   };
+
+  useEffect(() => {
+    console.log('Errors: ' + JSON.stringify(formErrors));
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log(formValues);
+    }
+  }, [formErrors]);
 
   function clearForm() {
     setFormValues({...initialValues});
@@ -84,10 +90,7 @@ function BankForm(props) {
               <button 
                 type="submit" 
                 className="btn btn-primary" 
-                onClick={() => {
-                  console.log('Submitting deposit: ' + formValues.amount)
-                  handleFormSubmit(formValues, handle);
-                }}
+                onClick={handleFormSubmit}
               >
                 {submitText}
               </button>
