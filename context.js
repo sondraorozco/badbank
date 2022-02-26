@@ -31,19 +31,19 @@ function Card(props) {
 function BankForm(props) {
   const { initialValues, fields, header, title, handle, showBalance, submitText, successMessage, successButton } = props;
   const [show, setShow]             = useState(true);
-  const [status, setStatus]         = useState('');
   const [formValues, setFormValues] = useState({...initialValues});
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit]     = useState(false);
   
-  const ctx = React.useContext(UserContext);
-  
+  const ctx = React.useContext(UserContext);    
+
   const fieldList = fields.map((item, index) => {
     const { label, type='text', id, name, placeholder='' } = item;
     return (
       <div className="mb-3" key={index}>
-        <label>{label}</label>
+        <label><strong>{label}</strong></label>
         <input type={type} className="form-control" id={id} name={name} placeholder={placeholder} value={formValues[name]} onChange={handleFormChange} />
+        <p className="text-danger"><small>{formErrors[name]}</small></p>
       </div>
     );
   });
@@ -69,6 +69,7 @@ function BankForm(props) {
     console.log('Errors: ' + JSON.stringify(formErrors));
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       console.log(formValues);
+      setShow(false);
     }
   }, [formErrors]);
 
@@ -80,7 +81,6 @@ function BankForm(props) {
   return (
     <Card
       header={header}
-      status={status}
       body={show ? (
           <>
             { showBalance && <p>Balance: {ctx.users[0].balance.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p> }
@@ -98,7 +98,7 @@ function BankForm(props) {
           </>
         ) : (
           <>
-            <h5>Success!</h5>
+            <h5 className="text-success">Success!</h5>
             <p>{successMessage}</p>
             { showBalance && <p>New balance: {ctx.users[0].balance.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p> }
             <button 

@@ -17,11 +17,11 @@ function Deposit() {
     // validate form fields and store any errors
     const errors = {};
     if (!values.amount) {
-      errors.amount = "Please enter the amount to deposit"
+      errors.amount = "Please enter the deposit amount"
     } else if (isNaN(values.amount)) {
       errors.amount = "Amount must be a number"
     } else if (values.amount < 0) {
-      errors.amount = "The deposit amount can not be negative"
+      errors.amount = "Amount cannot be negative"
     };
 
     // if no errors found, update user's account balance
