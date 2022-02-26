@@ -11,9 +11,6 @@ function Deposit() {
   ];
 
   function handleDeposit(values) {
-    console.log('Submitting deposit: ' + values.amount);
-    console.log();
-
     // validate form fields and store any errors
     const errors = {};
     if (!values.amount) {
@@ -35,8 +32,6 @@ function Deposit() {
 
   return (
     <>
-      <h1 className="mb-3">Account Deposit</h1>
-
       <BankForm 
         header="Deposit"
         initialValues={initialValues}

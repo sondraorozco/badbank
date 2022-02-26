@@ -68,7 +68,6 @@ function BankForm(props) {
   useEffect(() => {
     console.log('Errors: ' + JSON.stringify(formErrors));
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
       setShow(false);
     }
   }, [formErrors]);
@@ -87,11 +86,7 @@ function BankForm(props) {
             <form>
               {fieldList}
 
-              <button 
-                type="submit" 
-                className="btn btn-primary" 
-                onClick={handleFormSubmit}
-              >
+              <button type="submit" className="btn btn-primary" onClick={handleFormSubmit}>
                 {submitText}
               </button>
             </form>
@@ -101,11 +96,7 @@ function BankForm(props) {
             <h5 className="text-success">Success!</h5>
             <p>{successMessage}</p>
             { showBalance && <p>New balance: {ctx.users[0].balance.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p> }
-            <button 
-              type="submit" 
-              className="btn btn-secondary" 
-              onClick={clearForm}
-            >
+            <button type="submit" className="btn btn-secondary" onClick={clearForm}>
               {successButton}
             </button>
           </>
