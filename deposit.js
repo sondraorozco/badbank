@@ -25,7 +25,7 @@ function Deposit() {
 
       <BankForm 
         header="Deposit"
-        initialValue={initialValues}
+        initialValues={initialValues}
         fields={fields}
         handle={handleDeposit}
         showBalance={true}
