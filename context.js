@@ -77,7 +77,7 @@ function BankForm(props) {
       status={status}
       body={show ? (
           <>
-            { showBalance && <p>Balance: ${ctx.users[0].balance}</p> }
+            { showBalance && <p>Balance: {ctx.users[0].balance.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p> }
             <form>
               {fieldList}
 
@@ -97,8 +97,14 @@ function BankForm(props) {
           <>
             <h5>Success!</h5>
             <p>{successMessage}</p>
-            { showBalance && <p>New balance: ${ctx.users[0].balance}</p> }
-            <button type="submit" className="btn btn-light" onClick={clearForm}>{successButton}</button>
+            { showBalance && <p>New balance: {ctx.users[0].balance.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p> }
+            <button 
+              type="submit" 
+              className="btn btn-secondary" 
+              onClick={clearForm}
+            >
+              {successButton}
+            </button>
           </>
         )}
     />
