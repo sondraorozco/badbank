@@ -1,6 +1,5 @@
 function CreateAccount() {
   const ctx = React.useContext(UserContext);
-  const userId = React.useContext(CurrentUserContext);
 
   const initialValues = {
     name: '',

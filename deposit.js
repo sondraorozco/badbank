@@ -1,6 +1,6 @@
 function Deposit() {
   const ctx = React.useContext(UserContext);
-  const userId = React.useContext(CurrentUserContext);
+  const trx = React.useContext(TransactionContext);
 
   const initialValues = {
     amount: '',
@@ -25,6 +25,7 @@ function Deposit() {
     if (Object.keys(errors).length === 0) {
       ctx.users[0].balance = ctx.users[0].balance + Number(values.amount);
       console.log('Depositing: $' + values.amount + '; new balance: $' + ctx.users[0].balance);
+      trx.transactions.push({email:ctx.users[0].email, amount:values.amount, type: 'deposit', balance:ctx.users[0].balance});
     }
 
     return errors;

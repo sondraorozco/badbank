@@ -4,7 +4,7 @@ const Link                = ReactRouterDOM.Link;
 const NavLink             = ReactRouterDOM.NavLink;
 const HashRouter          = ReactRouterDOM.HashRouter;
 const UserContext         = React.createContext(null);
-const CurrentUserContext  = React.createContext(null);
+const TransactionContext  = React.createContext(null);
 
 function Card(props) {
   const customStyle = props.customStyle ? props.customStyle : {maxWidth: "18rem"}
