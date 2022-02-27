@@ -1,49 +1,47 @@
 function Withdraw() {
-  const [show, setShow]         = React.useState(true);
-  const [status, setStatus]     = React.useState('');
-  const [amount, setAmount]     = React.useState(0);
   const ctx = React.useContext(UserContext);
+  const userId = React.useContext(CurrentUserContext);
 
-  function validate(field, label){
-    if (!field) {
-      setStatus('Error: ' + label + ' is a required field');
-      setTimeout(() => setStatus(''),3000);
-      return false;
+  const initialValues = {
+    amount: '',
+  };
+
+  let fields = [
+    {id:"amount", name:"amount", label:"Withdrawl Amount", type:"text" },
+  ];
+
+  function handleWithdraw(values) {
+    // validate form fields and store any errors
+    const errors = {};
+    if (!values.amount) {
+      errors.amount = "Please enter the withdrawl amount"
+    } else if (isNaN(values.amount)) {
+      errors.amount = "Amount must be a number"
+    } else if (values.amount > ctx.users[0].balance) {
+      errors.amount = "Insufficient funds"
+    };
+
+    // if no errors found, update user's account balance
+    if (Object.keys(errors).length === 0) {
+      ctx.users[0].balance = ctx.users[0].balance - Number(values.amount);
+      console.log('Withdrawing: $' + values.amount + '; new balance: $' + ctx.users[0].balance);
     }
-    return true;
-  }
 
-  function handleWithdraw() {
-    console.log(`Withdrawl request: $ ${amount}`);
-    if (!validate(amount, 'amount')) return;
-    ctx.users[0].balance = ctx.users[0].balance - amount;
-    setShow(false);
-  }
-
-  function clearForm() {
-    setAmount(0);
-    setShow(true);
-  }
+    return errors;
+  };
 
   return (
-    <Card
-      header="Withdraw"
-      status={status}
-      body={show ? (
-          <>
-            <p>Balance: ${ctx.users[0].balance}</p>
-            Amount<br/>
-            <input type="number" className="form-control" id="amount"  value={amount} onChange={e => setAmount(e.currentTarget.value)} /><br/>
-            <button type="submit" className="btn btn-light" onClick={handleWithdraw}>Withdraw</button>
-          </>
-        ) : (
-          <>
-            <h5>Success!</h5>
-            <p>Your funds have been withdrawn from your account.</p>
-            <p>New balance: ${ctx.users[0].balance}</p>
-            <button type="submit" className="btn btn-light" onClick={clearForm}>Make another withdrawl</button>
-          </>
-        )}
-    />
+    <>
+      <BankForm 
+        header="Withdraw"
+        initialValues={initialValues}
+        fields={fields}
+        handle={handleWithdraw}
+        showBalance={true}
+        submitText="Withdraw"
+        successMessage="The requested funds have been withdrawn from your account."
+        successButton="Make another withdrawl"
+      />
+    </>
   );
 }
