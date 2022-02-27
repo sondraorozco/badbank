@@ -11,7 +11,7 @@ function CreateAccount() {
 
   let fields = [
     {id:"name", name:"name", label:"Name", type:"text", placeholder: "Michael Scott" },
-    {id:"balance", name:"balance", label:"Initial Deposit", type:"text"},
+    {id:"balance", name:"balance", label:"Initial Deposit", type:"text", placeholder:"100"},
     {id:"email", name:"email", label:"Email", type:"email", placeholder: "michael@dundermifflin.net" },
     {id:"password", name:"password", label:"Password", type:"password", placeholder: "Enter a password" },
   ];
