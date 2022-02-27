@@ -69,7 +69,7 @@ function AllData() {
     return (
       <>
         <Card
-          header="View Session Transactions"
+          header={`View Session Transactions (for user: ${ctx.users[0].email})`}
           customStyle={{ maxWidth: "100%" }}
           body={ 
             <table className="table table-striped">
