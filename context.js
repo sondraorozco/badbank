@@ -7,6 +7,8 @@ const UserContext         = React.createContext(null);
 const CurrentUserContext  = React.createContext(null);
 
 function Card(props) {
+  const customStyle = props.customStyle ? props.customStyle : {maxWidth: "18rem"}
+
   function classes() {
     const bg = props.bgcolor ? ' bg-' + props.bgcolor : ' ';
     const txt = props.txtcolor ? ' text-' + props.txtcolor : ' ';
@@ -15,7 +17,7 @@ function Card(props) {
 
   return (
     <div className="container">
-      <div className={classes()} style={{maxWidth: "18rem"}}> 
+      <div className={classes()} style={customStyle}> 
         <div className="card-header">{props.header}</div>
         <div className="card-body">
           {props.title && (<h5 className="card-title">{props.title}</h5>)}
@@ -29,7 +31,7 @@ function Card(props) {
 };
 
 function BankForm(props) {
-  const { initialValues, fields, header, title, handle, showBalance, submitText, successMessage, successButton } = props;
+  const { initialValues, fields, header, handle, showBalance, submitText, successMessage, successButton } = props;
   const [show, setShow]             = useState(true);
   const [formValues, setFormValues] = useState({...initialValues});
   const [formErrors, setFormErrors] = useState({});
