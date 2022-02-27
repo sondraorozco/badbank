@@ -28,19 +28,25 @@ function Home() {
         customStyle={{ maxWidth: "100%" }}
         body={(
           <>
-            <img src="home-image.jpg" className="card-img" alt="Bank icon image" />
+            <img src="home-image.png" className="card-img" alt="Bank icon image" />
             <div className="card-img-overlay">
               <div className="container p-3">
                 <h1 className="card-title">BadBank</h1>
                 <p className="card-text"><em>Your money is safe with us.</em></p>
 
-                <div className="container p-3 text-end">
-                  <h3 className="card-text">
-                    <Greeting />
-                  </h3>
-                  <p className="card-text">How can we help you today?</p>
-                  <Link to="/deposit" className="btn btn-info mb-3">Make a deposit</Link><br />
-                  <Link to="/withdraw" className="btn btn-info mb-3">Make a withdrawl</Link>
+                <div className="container p-3 text-center">
+                  <div className="row">
+                    <div className="col">
+                    </div>
+                    <div className="col">
+                      <h3 className="card-text">
+                        <Greeting />
+                      </h3>
+                      <p className="card-text">How can we help you today?</p>
+                      <Link to="/deposit" className="btn btn-info mb-3">Make a deposit</Link><br />
+                      <Link to="/withdraw" className="btn btn-info mb-3">Make a withdrawl</Link>
+                    </div>
+                  </div>
                 </div>
                 
               </div>
@@ -48,8 +54,11 @@ function Home() {
           </>
         )}
       />
-      <p className="mb-2"><small>Just in case it's not already obvious... this isn't a real bank. :P</small></p>
-      <p><small>Photo by <a href="https://unsplash.com/@micheile?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Visual Stories || Micheile</a> on <a href="https://unsplash.com/s/photos/bank?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></small></p>
+      <div className="container">
+        <p className="mb-2"><small>BadBank React app by Sondra Orozco. This is a portfolio project for the MIT xPro Full Stack Web Dev course. <a href="https://github.com/sondraorozco/badbank#readme">Learn more.</a> Just in case it's not already obvious... this isn't a real bank. :P</small></p>
+      
+        <p><small>Photo by <a href="https://unsplash.com/@micheile?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Visual Stories || Micheile</a> on <a href="https://unsplash.com/s/photos/bank?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></small></p>
+      </div>
     </>
   );
 }
