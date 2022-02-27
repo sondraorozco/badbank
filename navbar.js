@@ -2,7 +2,6 @@ function NavBar() {
   const linkList = [
     {path: '/', name:'Home', tooltipText: 'Go to welcome landing page'},
     {path: '/createaccount', name:'Create Account', tooltipText: 'Create a new user account'},
-    {path: '/login', name:'Login', tooltipText: 'Login to an existing account'},
     {path: '/deposit', name:'Deposit', tooltipText: 'Deposit funds to your account'},
     {path: '/withdraw', name:'Withdraw', tooltipText: 'Withdraw funds from your account'},
     {path: '/alldata', name:'All Data', tooltipText: 'View all users from admin console'},
