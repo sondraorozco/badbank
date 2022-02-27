@@ -27,8 +27,8 @@ TBD
 
 ## Roadmap
 A list of things I'd like to improve:
-[ ] Use create-react-app instead of standalone app
-[ ] Add tests
-[ ] Make homepage design responsive
-[ ] Add a login page to switch context of the current user
+- [ ] Use create-react-app instead of standalone app
+- [ ] Add tests
+- [ ] Make homepage design responsive
+- [ ] Add a login page to switch context of the current user
 
