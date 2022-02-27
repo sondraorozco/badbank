@@ -34,9 +34,12 @@ function BankForm(props) {
   const [formValues, setFormValues] = useState({...initialValues});
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit]     = useState(false);
-  
   const ctx = React.useContext(UserContext);    
 
+  // check if any fields have values inputted to enable form's Submit button
+  let isEnabled = Object.values(formValues).join('').length > 0;
+  
+  // create input fields from fieldList
   const fieldList = fields.map((item, index) => {
     const { label, type='text', id, name, placeholder='' } = item;
     return (
@@ -48,6 +51,7 @@ function BankForm(props) {
     );
   });
   
+  // handle changes to form fields, store in state
   function handleFormChange(event) {
     const { name, value } = event.target;
     const newValues = {
@@ -59,12 +63,14 @@ function BankForm(props) {
     event.preventDefault();
   };
 
+  // handle form submission, returns errors object
   function handleFormSubmit(e) {
     e.preventDefault();
     setFormErrors(handle(formValues));
     setIsSubmit(true);
   };
 
+  // show error messages when value of formErrors state changes
   useEffect(() => {
     console.log('Errors: ' + JSON.stringify(formErrors));
     if (Object.keys(formErrors).length === 0 && isSubmit) {
@@ -86,7 +92,7 @@ function BankForm(props) {
             <form>
               {fieldList}
 
-              <button type="submit" className="btn btn-primary" onClick={handleFormSubmit}>
+              <button type="submit" className="btn btn-primary" onClick={handleFormSubmit} disabled={!isEnabled}>
                 {submitText}
               </button>
             </form>

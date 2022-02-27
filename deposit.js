@@ -3,7 +3,7 @@ function Deposit() {
   const userId = React.useContext(CurrentUserContext);
 
   const initialValues = {
-    amount: 0,
+    amount: '',
   };
 
   let fields = [
