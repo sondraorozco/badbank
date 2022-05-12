@@ -24,8 +24,8 @@ This React app was a portfolio assignment for the MIT xPro Professional Certific
 ### App screenshots
 ![homepage image](/public/images/homepage.png)
 ![create account page](/public/images/create-account.png)
-![deposit form](/public/images/deposit.pn)
-![withdraw form](/public/images/withdraw.pn)
+![deposit form](/public/images/deposit.png)
+![withdraw form](/public/images/withdraw.png)
 
 ## Installation guidelines
 Running the following to install and view this application:
