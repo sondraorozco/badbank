@@ -1,23 +1,45 @@
-function Spa() {
-  return (
-      <HashRouter>
-        <NavBar/>
-        <div className="container">
-          <UserContext.Provider value={{users:[{name:'Jane',email:'jane@email.com',password:'secret123',balance:100}]}}>
-          <TransactionContext.Provider value={{transactions:[{email:'jane@email.com',type:"opening deposit", amount:100, balance:100}]}}>
-            <Route path="/" exact component={Home} />
-            <Route path="/createaccount" component={CreateAccount} />
-            <Route path="/deposit" component={Deposit} />
-            <Route path="/withdraw" component={Withdraw} />
-            <Route path="/alldata" component={AllData} />
-          </TransactionContext.Provider>
-          </UserContext.Provider>
-        </div>
-      </HashRouter>
-  );
-}
+var express = require('express');
+var app     = express();
+var cors    = require('cors');
+var dal     = require('./dal.js');
 
-ReactDOM.render(
-  <Spa/>,
-  document.getElementById('root')
-);
+// used to serve static files from public directory
+app.use(express.static('public'));
+app.use(cors());
+
+// create user account
+app.get('/account/create/:name/:email/:password/:balance', function (req, res) {
+  // else create user
+  dal.create(req.params.name, req.params.email, req.params.password, req.params.balance).
+    then((user) => {
+      console.log(user);
+      res.send(user);
+    });
+});
+
+// all accounts
+app.get('/account/all', function (req, res) {
+  dal.all().
+    then((docs) => {
+      console.log(docs);
+      res.send(docs);
+    });
+});
+
+// deposit
+app.get('/deposit/:amount', function (req, res) {
+  res.send({
+    amount: req.params.amount
+  });
+});
+
+// withdrawal
+app.get('/withdraw/:amount', function (req, res) {
+  res.send({
+    amount: req.params.amount
+  });
+});
+
+var port = 3000;
+app.listen(port);
+console.log('Running on port: ' + port);

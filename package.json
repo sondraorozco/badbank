@@ -1,0 +1,25 @@
+{
+  "name": "badbank",
+  "version": "1.0.0",
+  "description": "This React app was a portfolio assignment for the MIT xPro Professional Certificate in Coding: Full Stack Development with MERN course. This app simulates a typical banking experience, where a user can make deposits and withdrawals, and can see their account balance. This app is an exercise in building frontend user experiences with React, and no real money is exchanged through this app.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sondraorozco/badbank.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sondraorozco/badbank/issues"
+  },
+  "homepage": "https://github.com/sondraorozco/badbank#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "mongodb": "^4.6.0"
+  }
+}

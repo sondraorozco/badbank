@@ -1,5 +1,4 @@
 function CreateAccount() {
-  const ctx = React.useContext(UserContext);
 
   const initialValues = {
     name: '',
@@ -46,7 +45,12 @@ function CreateAccount() {
 
     // if no errors found, update user's account balance
     if (Object.keys(errors).length === 0) {
-      ctx.users.push({...values});
+      const url = `/account/create/${values.name}/${values.email}/${values.password}/${values.balance}`;
+      (async () => {
+        var res = await fetch(url);
+        var data = await res.json();
+        console.log(data);
+      })();
     }
 
     return errors;
