@@ -22,7 +22,10 @@ This React app was a portfolio assignment for the MIT xPro Professional Certific
 * Additional styling on homepage and a time-based greeting to the user ("Good morning"/"Good afternoon"/"Good evening")
 
 ### App screenshots
-
+![homepage image](/public/images/homepage.png)
+![create account page](/public/images/create-account.png)
+![deposit form](/public/images/deposit.pn)
+![withdraw form](/public/images/withdraw.pn)
 
 ## Installation guidelines
 Running the following to install and view this application:
